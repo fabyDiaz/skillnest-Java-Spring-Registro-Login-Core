@@ -12,8 +12,5 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, Long>{
 
     // Buscar por nombre de usuario
     Optional<Usuario> findByNombreUsuario(String nombreUsuario);
-    
-    // Buscar por nombre de usuario y contraseña
-    Optional<Usuario> findByNombreUsuarioAndContrasena(String nombreUsuario, String contrasena);
 
 }

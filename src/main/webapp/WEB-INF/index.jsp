@@ -12,7 +12,7 @@
         <div class="container">
             <!-- FORMULARIO DE REGISTRO -->
             <div class="form-contenedor">
-                <form:form action="/procesa/registro" method="POST" modelAttribute="usuario">
+                <form:form action="/procesa/registro" method="POST" modelAttribute="usuario" autocomplete="off">
                     <h2>Registrarse</h2>
 
                     <div class="form-grupo">
@@ -77,12 +77,15 @@
             
             <!-- FORMULARIO DE LOGIN -->
             <div class="form-contenedor">
-                <form:form action="/procesa/login" method="POST" modelAttribute="usuarioLogin">
+                <form:form action="/procesa/login" method="POST" modelAttribute="usuarioLogin" autocomplete="off">
                     <h2>Iniciar Sesión</h2>
 
                     <div class="form-grupo">
                         <label for="usuarioLogin">Nombre de Usuario:</label>
-                        <form:input path="usuarioLogin" type="text" id="usuarioLogin"/>
+                        <div class="input-error">
+                            <form:input path="usuarioLogin" type="text" id="usuarioLogin"/>
+                            <form:errors path="usuarioLogin" class="error-inline"/>
+                        </div>
                     </div>
 
                     <div class="form-grupo">

@@ -29,10 +29,6 @@ public class ServicioUsuario {
         return this.repositorioUsuario.save(usuario);
     }
 
-    public Usuario obtenerUsuarioPorNombreYContrasena(Login usuarioLogin){
-        return this.repositorioUsuario.findByNombreUsuarioAndContrasena(usuarioLogin.getUsuarioLogin(), usuarioLogin.getContrasenaLogin()).orElse(null);
-    }       
-
     public Usuario actualizarUsuario(Usuario usuario){
         return this.repositorioUsuario.save(usuario);
     }
@@ -42,8 +38,16 @@ public class ServicioUsuario {
     }
 
     public BindingResult validarRegistro(BindingResult validaciones, Usuario usuarioRegistrado){
+        
+        Usuario usuarioExistente = this.obtenerUsuarioPorNombreUsuario(usuarioRegistrado.getNombreUsuario());
+        if(usuarioExistente != null){
+        validaciones.rejectValue("nombreUsuario", "UsuarioExistente", 
+                                "Este usuario ya está registrado.");
+        }
+        
         if(!usuarioRegistrado.getContrasena().equals(usuarioRegistrado.getConfirmacionContrasena())){
-            validaciones.rejectValue("confirmarPassword","passwordNoCoincide", "Las contraseñas deben de ser iguales.");
+            validaciones.rejectValue("confirmacionContrasena", "passwordNoCoincide", 
+                                "Las contraseñas deben ser iguales.");
         }
         return validaciones;
     }
